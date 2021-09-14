@@ -16,6 +16,7 @@ h3, p{
 }
 
 input {
+    box-sizing: border-box;
     width: 100%;
     padding-left: 10px;
     margin: 5px;
