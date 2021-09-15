@@ -1,16 +1,27 @@
-// Declare some important elements
+// Hooking up to the Main div and login div
 const main = document.getElementById('main');
 const login = document.getElementById('login');
-const nameInput = document.getElementById('nameInput');
-const passInput = document.getElementById('passInput');
+
+//Login Button is hard-coded to username "test" and password "1234"
 const loginButton = document.getElementById('loginButton');
 
-// Constructor for our website panels.
+loginButton.addEventListener('click', function () {
+    const nameInput = document.getElementById('nameInput');
+    const passInput = document.getElementById('passInput');
+
+    if (nameInput.value === "test" && passInput.value === "1234") {
+        localStorage.setItem('session', true)
+        login.classList.add('hide')
+        document.getElementById('success').classList.remove('hide');
+    } else {
+        login.classList.add('hide');
+        document.getElementById('fail').classList.remove('hide');
+    }
+});
+
+// Constructor for our website panels
 function Panel(div, title, text, button) {
- /*   this.div = div;
-    this.title = title;
-    this.text = text;
-    this.button = button;*/
+
     this.create = function () {
         const newDiv = document.createElement('div');
         newDiv.id = div;
@@ -46,12 +57,12 @@ function Panel(div, title, text, button) {
 
 // Create the required panels using our constructor
 const successPanel = new Panel('success', 'You\'re in!', 'Welcome to the best site - Enjoy your stay!', 'Sign Out');
-const failPanel = new Panel('fail', 'Whoops!', 'Wrong credentials: Terminator monkeys has been deployed.', 'Try Again');
+const failPanel = new Panel('fail', 'Whoops!', 'Wrong credentials: Terminator monkeys have been deployed.', 'Try Again');
 
 failPanel.create();
 successPanel.create();
 
-function checkSession() {
+// Check storage for logged in user upon page load
     if (localStorage.getItem('session')) {
         login.classList.add('hide');
         document.getElementById('success').classList.remove('hide')
@@ -61,20 +72,3 @@ function checkSession() {
         document.getElementById('success').classList.add('hide');
         document.getElementById('fail').classList.add('hide');
     }
-}
-
-// Look for user on page-load
-checkSession();
-
-//Login Button
-loginButton.addEventListener('click', function () {
-
-    if (nameInput.value === "test" && passInput.value === "1234") {
-        localStorage.setItem('session', true)
-        login.classList.add('hide')
-        document.getElementById('success').classList.remove('hide');
-    } else {
-        login.classList.add('hide');
-        document.getElementById('fail').classList.remove('hide');
-    }
-});
