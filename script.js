@@ -25,7 +25,7 @@ function Panel(div, title, text, button) {
     // Draw the elements with text-content based on parameter input
     this.create = function () {
         const newDiv = document.createElement('div');                   // This is the parent div of the panel
-        this.id = newDiv;                                               // And it will also be this object's Element ID that we can refer to
+        this.id = newDiv;                                               // And it will also be this panel's Element Id that we can refer to on a Property basis.
         newDiv.id = div;
         main.appendChild(newDiv);
 
@@ -50,7 +50,7 @@ function Panel(div, title, text, button) {
         successPanel.id.classList.add('hide');
         failPanel.id.classList.add('hide');
 
-        if (this.button = 'Sign Out') {             // In this case our buttons only have two options so if you're not signing out you are by default trying to login again.
+        if (button === 'Sign Out') {             // In this case our buttons only have two options so if you're not signing out you are by default trying to login again.
             login.classList.remove('hide');
             localStorage.removeItem('session');
         }
